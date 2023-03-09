@@ -7,6 +7,6 @@ const INITIAL_STATE = {
   idToEdit: 0, // valor numérico que armazena o id da despesa que esta sendo editada
 };
 
-const wallet = (state = INITIAL_STATE, action) => state;
+const wallet = (state = INITIAL_STATE) => state;
 
 export default wallet;
