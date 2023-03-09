@@ -12,10 +12,12 @@ class Wallet extends React.Component {
   }
 
   render() {
+    const { currencies } = this.props;
+
     return (
       <div>
         <Header />
-        <WalletForm />
+        <WalletForm currencies={ currencies } />
       </div>
     );
   }
@@ -23,6 +25,11 @@ class Wallet extends React.Component {
 
 Wallet.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default connect()(Wallet);
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
+});
+
+export default connect(mapStateToProps)(Wallet);

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class WalletForm extends Component {
   render() {
+    const { currencies } = this.props;
+
     return (
       <form>
         <label htmlFor="value">
@@ -13,11 +16,18 @@ class WalletForm extends Component {
           />
         </label>
 
-        {/* // TERMINAR  */}
         <label htmlFor="currency">
           Moeda:
           <select data-testid="currency-input" id="currency">
-            <option>BRL</option>
+            { currencies
+              .map((currency, index) => (
+                <option
+                  key={ index }
+                  value={ currency }
+                >
+                  { currency }
+
+                </option>))}
           </select>
         </label>
 
@@ -61,5 +71,9 @@ class WalletForm extends Component {
     );
   }
 }
+
+WalletForm.propTypes = {
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default WalletForm;
