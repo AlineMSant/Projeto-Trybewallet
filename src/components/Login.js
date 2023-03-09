@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Login extends React.Component {
   constructor() {
@@ -12,6 +13,7 @@ class Login extends React.Component {
 
     this.disableBtn = this.disableBtn.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -22,12 +24,19 @@ class Login extends React.Component {
     }, () => this.disableBtn());
   }
 
+  handleClick() {
+    const { history } = this.props;
+
+    history.push('/carteira');
+  }
+
   disableBtn() {
     const {
       email,
       password,
     } = this.state;
 
+    // https://horadecodar.com.br/2020/09/13como-validar-email-com-javascript/
     const validationEmail = /\S+@\S+\.\S+/;
     const number = 6;
 
@@ -60,6 +69,7 @@ class Login extends React.Component {
         />
         <button
           disabled={ disabled }
+          onClick={ this.handleClick }
         >
           Entrar
 
@@ -68,5 +78,11 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default Login;
