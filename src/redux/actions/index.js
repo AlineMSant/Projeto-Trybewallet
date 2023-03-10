@@ -1,5 +1,6 @@
 export const SAVED_USER = 'SAVED_USER';
 export const SAVE_CURRENCY = 'SAVE_CURRENCY';
+export const SAVE_EXPENSES = 'SAVE_EXPENSES';
 
 export const savedUser = (email) => ({
   type: SAVED_USER,
@@ -9,6 +10,11 @@ export const savedUser = (email) => ({
 export const saveCurrency = (currency) => ({
   type: SAVE_CURRENCY,
   payload: currency,
+});
+
+export const saveExpenses = (expenses) => ({
+  type: SAVE_EXPENSES,
+  payload: expenses,
 });
 
 export function generateCurrency() {
