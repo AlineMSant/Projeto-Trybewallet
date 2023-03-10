@@ -42,7 +42,11 @@ class Table extends Component {
 
                 </td>
                 <td>Real</td>
-                <td>editar</td>
+                <td>
+                  <button data-testid="delete-btn">
+                    Excluir
+                  </button>
+                </td>
               </tr>)) }
           </tbody>
         </table>
