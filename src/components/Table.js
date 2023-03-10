@@ -28,12 +28,19 @@ class Table extends Component {
                 <td>{ expense.description }</td>
                 <td>{ expense.tag }</td>
                 <td>{ expense.method }</td>
-                <td>{ expense.value }</td>
+                <td>{ parseFloat(expense.value).toFixed(2) }</td>
                 <td>
                   {expense.exchangeRates[expense.currency].name}
                 </td>
-                <td>cambio</td>
-                <td>convertido</td>
+                <td>
+                  {parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}
+
+                </td>
+                <td>
+                  {parseFloat(expense.value * expense
+                    .exchangeRates[expense.currency].ask).toFixed(2)}
+
+                </td>
                 <td>Real</td>
                 <td>editar</td>
               </tr>)) }
