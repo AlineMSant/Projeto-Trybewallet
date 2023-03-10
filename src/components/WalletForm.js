@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { saveExpenses } from '../redux/actions';
+import { generateExpenses } from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
@@ -10,16 +10,14 @@ class WalletForm extends Component {
     this.state = {
       id: 0,
       value: 0,
-      currency: 'USD',
-      method: 'dinheiro',
-      tag: 'alimentação',
       description: '',
-      allExpenses: [],
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.dispatchFunc = this.dispatchFunc.bind(this);
   }
 
   handleChange(event) {
@@ -31,38 +29,16 @@ class WalletForm extends Component {
   }
 
   handleClick() {
-    const { id, value, currency, method, tag, description } = this.state;
-    const { exchangeRates } = this.props;
+    const { dispatch } = this.props;
+    dispatch(generateExpenses(this.state));
 
     this.setState((prevState) => ({
-      allExpenses: [...prevState.allExpenses, {
-        id,
-        value,
-        currency,
-        method,
-        tag,
-        description,
-        exchangeRates }],
-    }), () => this.dispatchFunc());
-
-    this.setState({
-      id: id + 1,
-      value: 0,
-      currency: 'USD',
-      method: 'dinheiro',
-      tag: 'alimentação',
-      description: '',
-    });
+      id: prevState.id + 1,
+    }));
 
     // https://pt.stackoverflow.com/questions/341596/fun%C3%A7%C3%A3o-reset-form-em-js-n%C3%A3o-funciona#:~:text=Ao%20clicar%20no%20bot%C3%A3o%20ser%C3%A1,ou%20palavras%20reservadas%20da%20linguagem.
     const form = document.getElementById('form');
     form.reset();
-  }
-
-  dispatchFunc() {
-    const { allExpenses } = this.state;
-    const { dispatch } = this.props;
-    return dispatch(saveExpenses(allExpenses));
   }
 
   render() {
@@ -109,9 +85,9 @@ class WalletForm extends Component {
             data-testid="method-input"
             onChange={ this.handleChange }
           >
-            <option value="dinheiro">Dinheiro</option>
-            <option value="credito">Cartão de crédito</option>
-            <option value="debito">Cartão de débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
 
@@ -123,11 +99,11 @@ class WalletForm extends Component {
             data-testid="tag-input"
             onChange={ this.handleChange }
           >
-            <option value="alimentacao">Alimentação</option>
-            <option value="lazer">Lazer</option>
-            <option value="trabalho">Trabalho</option>
-            <option value="transporte">Transporte</option>
-            <option value="saude">Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </label>
 
@@ -157,7 +133,6 @@ class WalletForm extends Component {
 WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   dispatch: PropTypes.func.isRequired,
-  exchangeRates: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
 };
 
 export default connect()(WalletForm);

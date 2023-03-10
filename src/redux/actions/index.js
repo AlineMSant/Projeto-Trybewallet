@@ -12,9 +12,9 @@ export const saveCurrency = (currency) => ({
   payload: currency,
 });
 
-export const saveExpenses = (expenses) => ({
+export const saveExpenses = (objExpenses) => ({
   type: SAVE_EXPENSES,
-  payload: expenses,
+  payload: objExpenses,
 });
 
 export function generateCurrency() {
@@ -23,5 +23,22 @@ export function generateCurrency() {
       .then((response) => response.json())
       .then((data) => dispatch(saveCurrency(Object.keys(data)
         .filter((moeda) => moeda !== 'USDT'))));
+  };
+}
+
+export function generateExpenses(info) {
+  // info[exchangeRates] = data;
+
+  return (dispatch) => {
+    fetch('https://economia.awesomeapi.com.br/json/all')
+      .then((response) => response.json())
+      .then((data) => {
+        const objExpenses = {
+          ...info,
+          exchangeRates: data,
+        };
+
+        dispatch(saveExpenses(objExpenses));
+      });
   };
 }
