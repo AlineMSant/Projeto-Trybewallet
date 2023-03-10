@@ -14,6 +14,7 @@ class WalletForm extends Component {
       method: 'dinheiro',
       tag: 'alimentação',
       description: '',
+      allExpenses: [],
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -29,17 +30,22 @@ class WalletForm extends Component {
   }
 
   handleClick() {
-    const { id, value, currency, method, tag, description } = this.state;
-    const { dispatch, exchangeRates } = this.props;
+    const { id, value, currency, method, tag, description, allExpenses } = this.state;
+    const { exchangeRates } = this.props;
 
-    dispatch(saveExpenses({
-      id,
-      value,
-      currency,
-      method,
-      tag,
-      description,
-      exchangeRates }));
+    this.setState((prevState) => ({
+      allExpenses: [...prevState.allExpenses, {
+        id,
+        value,
+        currency,
+        method,
+        tag,
+        description,
+        exchangeRates }],
+    }));
+
+    const { dispatch } = this.props;
+    dispatch(saveExpenses(allExpenses));
 
     this.setState({
       id: id + 1,
