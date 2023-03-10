@@ -19,6 +19,7 @@ class WalletForm extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.dispatchFunc = this.dispatchFunc.bind(this);
   }
 
   handleChange(event) {
@@ -30,7 +31,7 @@ class WalletForm extends Component {
   }
 
   handleClick() {
-    const { id, value, currency, method, tag, description, allExpenses } = this.state;
+    const { id, value, currency, method, tag, description } = this.state;
     const { exchangeRates } = this.props;
 
     this.setState((prevState) => ({
@@ -42,10 +43,7 @@ class WalletForm extends Component {
         tag,
         description,
         exchangeRates }],
-    }));
-
-    const { dispatch } = this.props;
-    dispatch(saveExpenses(allExpenses));
+    }), () => this.dispatchFunc());
 
     this.setState({
       id: id + 1,
@@ -59,6 +57,12 @@ class WalletForm extends Component {
     // https://pt.stackoverflow.com/questions/341596/fun%C3%A7%C3%A3o-reset-form-em-js-n%C3%A3o-funciona#:~:text=Ao%20clicar%20no%20bot%C3%A3o%20ser%C3%A1,ou%20palavras%20reservadas%20da%20linguagem.
     const form = document.getElementById('form');
     form.reset();
+  }
+
+  dispatchFunc() {
+    const { allExpenses } = this.state;
+    const { dispatch } = this.props;
+    return dispatch(saveExpenses(allExpenses));
   }
 
   render() {
