@@ -1,6 +1,7 @@
 export const SAVED_USER = 'SAVED_USER';
 export const SAVE_CURRENCY = 'SAVE_CURRENCY';
 export const SAVE_EXPENSES = 'SAVE_EXPENSES';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const savedUser = (email) => ({
   type: SAVED_USER,
@@ -15,6 +16,11 @@ export const saveCurrency = (currency) => ({
 export const saveExpenses = (objExpenses) => ({
   type: SAVE_EXPENSES,
   payload: objExpenses,
+});
+
+export const deleteExpenses = (id) => ({
+  type: DELETE_EXPENSE,
+  payload: id,
 });
 
 export function generateCurrency() {

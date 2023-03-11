@@ -30,12 +30,12 @@ class WalletForm extends Component {
   }
 
   handleClick() {
-    const { dispatch } = this.props;
+    const { dispatch, allExpenses } = this.props;
     dispatch(generateExpenses(this.state));
 
-    this.setState((prevState) => ({
-      id: prevState.id + 1,
-    }));
+    this.setState({
+      id: allExpenses.length + 1,
+    });
 
     // https://pt.stackoverflow.com/questions/341596/fun%C3%A7%C3%A3o-reset-form-em-js-n%C3%A3o-funciona#:~:text=Ao%20clicar%20no%20bot%C3%A3o%20ser%C3%A1,ou%20palavras%20reservadas%20da%20linguagem.
     const form = document.getElementById('form');
@@ -138,8 +138,20 @@ class WalletForm extends Component {
 }
 
 WalletForm.propTypes = {
+  allExpenses: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    value: PropTypes.string,
+    currency: PropTypes.string,
+    method: PropTypes.string,
+    description: PropTypes.string,
+    eschangeRates: PropTypes.objectOf(PropTypes.objectOf.string),
+  })).isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect()(WalletForm);
+const mapStateToProps = (state) => ({
+  allExpenses: state.wallet.expenses,
+});
+
+export default connect(mapStateToProps)(WalletForm);
