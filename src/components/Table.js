@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteExpenses } from '../redux/actions';
+// import { editExpenses  } from '../redux/actions';
 
 class Table extends Component {
   constructor() {
@@ -13,9 +14,9 @@ class Table extends Component {
   handleClick(event) {
     const { dispatch } = this.props;
     const idItem = parseFloat(event.target.value);
-    console.log(typeof idItem);
-    console.log(idItem);
+
     dispatch(deleteExpenses(idItem));
+    // dispatch(editExpenses());
   }
 
   render() {
@@ -39,7 +40,7 @@ class Table extends Component {
           </thead>
           <tbody>
             { allExpenses.map((expense, index) => (
-              <tr key={ index } value={ index }>
+              <tr key={ expense.id }>
                 <td>{ expense.description }</td>
                 <td>{ expense.tag }</td>
                 <td>{ expense.method }</td>

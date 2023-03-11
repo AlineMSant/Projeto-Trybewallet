@@ -1,5 +1,6 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import { SAVE_CURRENCY, SAVE_EXPENSES, DELETE_EXPENSE } from '../actions';
+// import { EDIT_EXPENSE } from '../action';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
@@ -26,6 +27,19 @@ const wallet = (state = INITIAL_STATE, action) => {
       expenses: state.expenses.length === 1 ? [] : state.expenses
         .filter((expense) => expense.id !== action.payload),
     };
+    // case EDIT_EXPENSE:
+    //   return {
+    //     ...state,
+    //     expenses: state.expenses.map((expense, index) => ({
+    //       id: index,
+    //       value: expense.value,
+    //       description: expense.description,
+    //       currency: expense.currency,
+    //       method: expense.method,
+    //       tag: expense.tag,
+    //       exchangeRates: expense.exchangeRates,
+    //     })),
+    //   };
 
   default:
     return state;
