@@ -32,7 +32,7 @@ export function generateCurrency() {
   };
 }
 
-export function generateExpenses(info) {
+export function generateExpenses(id, info) {
   // info[exchangeRates] = data;
 
   return (dispatch) => {
@@ -40,6 +40,7 @@ export function generateExpenses(info) {
       .then((response) => response.json())
       .then((data) => {
         const objExpenses = {
+          id,
           ...info,
           exchangeRates: data,
         };
