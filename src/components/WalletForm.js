@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { changeArrayExpenses, changeExpense, generateExpenses } from '../redux/actions';
+import { changeExpense, editArrayExpenses, generateExpenses } from '../redux/actions';
 import Table from './Table';
 
 class WalletForm extends Component {
@@ -61,7 +61,7 @@ class WalletForm extends Component {
       tag,
     };
 
-    dispatch(changeArrayExpenses(obj));
+    dispatch(editArrayExpenses(obj));
     dispatch(changeExpense(false, 0));
 
     // https://pt.stackoverflow.com/questions/341596/fun%C3%A7%C3%A3o-reset-form-em-js-n%C3%A3o-funciona#:~:text=Ao%20clicar%20no%20bot%C3%A3o%20ser%C3%A1,ou%20palavras%20reservadas%20da%20linguagem.

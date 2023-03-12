@@ -68,18 +68,3 @@ export function generateExpenses(info) {
       });
   };
 }
-
-export function changeArrayExpenses(info) {
-  return (dispatch) => {
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => {
-        const obj = {
-          ...info,
-          exchangeRates: data,
-        };
-
-        dispatch(editArrayExpenses(obj));
-      });
-  };
-}
