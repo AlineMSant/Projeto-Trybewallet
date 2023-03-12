@@ -39,7 +39,7 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            { allExpenses.map((expense, index) => (
+            { allExpenses.map((expense) => (
               <tr key={ expense.id }>
                 <td>{ expense.description }</td>
                 <td>{ expense.tag }</td>
@@ -62,7 +62,7 @@ class Table extends Component {
                   <button
                     data-testid="delete-btn"
                     onClick={ this.handleClick }
-                    value={ index }
+                    value={ expense.id }
                   >
                     Excluir
                   </button>
