@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { generateExpenses } from '../redux/actions';
+import { changeArrayExpenses, changeExpense, generateExpenses } from '../redux/actions';
 import Table from './Table';
 
 class WalletForm extends Component {
@@ -19,6 +19,7 @@ class WalletForm extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClickEdit = this.handleClickEdit.bind(this);
   }
 
   handleChange(event) {
@@ -35,6 +36,11 @@ class WalletForm extends Component {
 
     this.setState((prevState) => ({
       id: prevState.id + 1,
+      value: 0,
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
     }));
 
     // https://pt.stackoverflow.com/questions/341596/fun%C3%A7%C3%A3o-reset-form-em-js-n%C3%A3o-funciona#:~:text=Ao%20clicar%20no%20bot%C3%A3o%20ser%C3%A1,ou%20palavras%20reservadas%20da%20linguagem.
@@ -42,8 +48,29 @@ class WalletForm extends Component {
     form.reset();
   }
 
+  handleClickEdit() {
+    const { dispatch, idToEdit } = this.props;
+    const { value, description, currency, method, tag } = this.state;
+
+    const obj = {
+      id: idToEdit,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+    };
+
+    dispatch(changeArrayExpenses(obj));
+    dispatch(changeExpense(false, 0));
+
+    // https://pt.stackoverflow.com/questions/341596/fun%C3%A7%C3%A3o-reset-form-em-js-n%C3%A3o-funciona#:~:text=Ao%20clicar%20no%20bot%C3%A3o%20ser%C3%A1,ou%20palavras%20reservadas%20da%20linguagem.
+    const form = document.getElementById('form');
+    form.reset();
+  }
+
   render() {
-    const { currencies } = this.props;
+    const { currencies, edit } = this.props;
 
     return (
 
@@ -122,12 +149,22 @@ class WalletForm extends Component {
             />
           </label>
 
-          <button
-            type="button"
-            onClick={ this.handleClick }
-          >
-            Adicionar despesa
-          </button>
+          { edit
+            ? (
+              <button
+                type="button"
+                onClick={ this.handleClickEdit }
+              >
+                Editar despesa
+              </button>)
+
+            : (
+              <button
+                type="button"
+                onClick={ this.handleClick }
+              >
+                Adicionar despesa
+              </button>)}
 
         </form>
 
@@ -148,10 +185,14 @@ WalletForm.propTypes = {
   // })).isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   dispatch: PropTypes.func.isRequired,
+  edit: PropTypes.bool.isRequired,
+  idToEdit: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   allExpenses: state.wallet.expenses,
+  edit: state.wallet.editor,
+  idToEdit: state.wallet.idToEdit,
 });
 
 export default connect(mapStateToProps)(WalletForm);
