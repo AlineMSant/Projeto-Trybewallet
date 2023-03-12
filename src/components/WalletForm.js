@@ -175,14 +175,6 @@ class WalletForm extends Component {
 }
 
 WalletForm.propTypes = {
-  // allExpenses: PropTypes.arrayOf(PropTypes.shape({
-  //   id: PropTypes.number,
-  //   value: PropTypes.string,
-  //   currency: PropTypes.string,
-  //   method: PropTypes.string,
-  //   description: PropTypes.string,
-  //   eschangeRates: PropTypes.objectOf(PropTypes.objectOf.string),
-  // })).isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   dispatch: PropTypes.func.isRequired,
   edit: PropTypes.bool.isRequired,

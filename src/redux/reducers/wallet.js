@@ -1,7 +1,6 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import { SAVE_CURRENCY, SAVE_EXPENSES, DELETE_EXPENSE, CHANGE_EXPENSE,
   EDIT_ARRAY_EXPENSE } from '../actions';
-// import { EDIT_EXPENSE } from '../action';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
