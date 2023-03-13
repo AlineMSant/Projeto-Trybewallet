@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
 import mockData from './helpers/mockData';
+import user from '../redux/reducers/user';
 
 describe('Testes Login', () => {
   it('A pagina inicial na rota / deve renderizar dois inputs e um botão', () => {
@@ -235,5 +236,90 @@ describe('Testes wallet', () => {
 
     const insideTableOtherDesc = screen.getByText('altera descrição');
     expect(insideTableOtherDesc).toBeVisible();
+  });
+});
+
+describe('Testes wallet para cobertura de reducers', () => {
+  const descriptionInputTestId = 'description-input';
+  const valueInputTestId = 'value-input';
+  const totalHeaderTestId = 'total-field';
+
+  it('Testes gerais de outra forma mockando o fetch', async () => {
+    const initialEntries = ['/carteira'];
+
+    renderWithRouterAndRedux(<App />, { initialEntries });
+
+    jest.spyOn(global, 'fetch');
+
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(mockData),
+    });
+
+    const valueInput = screen.getByTestId(valueInputTestId);
+    const descriptionInput = screen.getByTestId(descriptionInputTestId);
+    const buttonAdd = screen.getByText('Adicionar despesa');
+
+    expect(valueInput).toBeVisible();
+    expect(descriptionInput).toBeVisible();
+    expect(buttonAdd).toBeVisible();
+
+    userEvent.type(valueInput, '10');
+    userEvent.type(descriptionInput, 'dez');
+    userEvent.click(buttonAdd);
+
+    userEvent.type(valueInput, '20');
+    userEvent.type(descriptionInput, 'vinte');
+    userEvent.click(buttonAdd);
+
+    userEvent.type(valueInput, '30');
+    userEvent.type(descriptionInput, 'trinta');
+    userEvent.click(buttonAdd);
+
+    const insideTableDescription = await screen.findByText('dez');
+    expect(insideTableDescription).toBeVisible();
+
+    const headerTotal = screen.getByTestId(totalHeaderTestId);
+    expect(headerTotal.innerHTML).toBe('285.19');
+
+    const editButton = screen.getAllByTestId('edit-btn');
+    expect(editButton).toHaveLength(3);
+    expect(editButton[0]).toBeVisible();
+    expect(editButton[1]).toBeVisible();
+    expect(editButton[2]).toBeVisible();
+
+    userEvent.click(editButton[0]);
+
+    const editButtonForm = screen.getByText('Editar despesa');
+    expect(editButtonForm).toBeVisible();
+
+    userEvent.type(valueInput, '70');
+    userEvent.type(descriptionInput, 'setenta');
+    userEvent.click(editButtonForm);
+
+    const headerTotalAfterEdit = screen.getByTestId(totalHeaderTestId);
+    expect(headerTotalAfterEdit.innerHTML).toBe('570.37');
+
+    const insideTableDescAfterEditS = screen.getByText('setenta');
+    const insideTableDescAfterEditV = screen.getByText('vinte');
+    const insideTableDescAfterEditT = screen.getByText('trinta');
+    expect(insideTableDescAfterEditS).toBeVisible();
+    expect(insideTableDescAfterEditV).toBeVisible();
+    expect(insideTableDescAfterEditT).toBeVisible();
+
+    const deleteButton = screen.getAllByTestId('delete-btn');
+    expect(deleteButton).toHaveLength(3);
+    expect(deleteButton[0]).toBeVisible();
+    expect(deleteButton[1]).toBeVisible();
+    expect(deleteButton[2]).toBeVisible();
+
+    userEvent.click(deleteButton[0]);
+    userEvent.click(deleteButton[1]);
+    userEvent.click(deleteButton[2]);
+
+    const headerTotalAfterDelete = screen.getByTestId(totalHeaderTestId);
+    expect(headerTotalAfterDelete.innerHTML).toBe('0.00');
+    expect(insideTableDescAfterEditS).not.toBeVisible();
+    expect(insideTableDescAfterEditV).not.toBeVisible();
+    expect(insideTableDescAfterEditT).not.toBeVisible();
   });
 });
