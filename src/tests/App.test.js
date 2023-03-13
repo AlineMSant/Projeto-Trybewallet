@@ -72,6 +72,7 @@ describe('Testes wallet', () => {
 
   const valueInputTestId = 'value-input';
   const descriptionInputTestId = 'description-input';
+  const totalHeaderTestId = 'total-field';
 
   it('Verifica se a rota /carteira renderiza o header, formulario e tabela', () => {
     const initialEntries = ['/carteira'];
@@ -146,7 +147,7 @@ describe('Testes wallet', () => {
 
     renderWithRouterAndRedux(<App />, { initialState, initialEntries });
 
-    const headerTotal = screen.getByTestId('total-field');
+    const headerTotal = screen.getByTestId(totalHeaderTestId);
     expect(headerTotal.innerHTML).toBe('47.53');
   });
 
@@ -185,7 +186,7 @@ describe('Testes wallet', () => {
 
     renderWithRouterAndRedux(<App />, { initialState, initialEntries });
 
-    const headerTotal = screen.getByTestId('total-field');
+    const headerTotal = screen.getByTestId(totalHeaderTestId);
     expect(headerTotal.innerHTML).toBe('142.59');
 
     const deleteButtons = screen.getAllByTestId('delete-btn');
@@ -197,7 +198,7 @@ describe('Testes wallet', () => {
     const deleteButtonsAfter = screen.getAllByTestId('delete-btn');
     expect(deleteButtonsAfter).toHaveLength(2);
 
-    const headerTotalAfter = screen.getByTestId('total-field');
+    const headerTotalAfter = screen.getByTestId(totalHeaderTestId);
     expect(headerTotalAfter.innerHTML).toBe('95.06');
   });
 
