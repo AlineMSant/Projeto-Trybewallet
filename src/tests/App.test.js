@@ -23,9 +23,37 @@ describe('testes Login', () => {
     expect(button.innerHTML).toBe('Entrar');
   });
 
-  // it('Verifica se o botão só é abilitado após os campos de email e senha serem preechidos corretamente', () => {
+  it('Verifica se o botão só é habilitado após os campos de email e senha serem preechidos corretamente', () => {
+    const initialEntries = ['/'];
 
-  // })
+    renderWithRouterAndRedux(<App />, { initialEntries });
+
+    const inputs = screen.getAllByRole('textbox');
+    const button = screen.getByRole('button');
+
+    expect(button).toHaveAttribute('disabled');
+
+    userEvent.type(inputs[0], 'aline@gmail');
+    expect(button).toHaveAttribute('disabled');
+
+    userEvent.clear(inputs[0]);
+
+    userEvent.type(inputs[0], 'alinegmail.com');
+    expect(button).toHaveAttribute('disabled');
+
+    userEvent.clear(inputs[0]);
+
+    userEvent.type(inputs[0], 'aline@gmail.com');
+    expect(button).toHaveAttribute('disabled');
+
+    userEvent.type(inputs[1], '12345');
+    expect(button).toHaveAttribute('disabled');
+
+    userEvent.clear(inputs[1]);
+
+    userEvent.type(inputs[1], '123456');
+    expect(button).not.toHaveAttribute('disabled');
+  });
 });
 
 describe('Testes wallet', () => {
