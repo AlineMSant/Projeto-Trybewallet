@@ -1,12 +1,11 @@
 import { screen } from '@testing-library/react';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
-import Login from '../pages/Login';
-import Wallet from '../pages/Wallet';
+import App from '../App';
 
 it('A pagina inicial na rota / deve renderizar dois inputs e um botão', () => {
   const initialEntries = ['/'];
 
-  const { history } = renderWithRouterAndRedux(<Login />, { initialEntries });
+  const { history } = renderWithRouterAndRedux(<App />, { initialEntries });
 
   const { pathname } = history.location;
   expect(pathname).toBe('/');
@@ -24,7 +23,7 @@ it('A pagina inicial na rota / deve renderizar dois inputs e um botão', () => {
 it('Verifica se a rota /carteira renderiza o header, formulario e tabela', () => {
   const initialEntries = ['/carteira'];
 
-  const { history } = renderWithRouterAndRedux(<Wallet />, { initialEntries }); // warning
+  const { history } = renderWithRouterAndRedux(<App />, { initialEntries }); // warning
 
   const { pathname } = history.location;
   expect(pathname).toBe('/carteira');
@@ -59,7 +58,7 @@ it('Verifica se o email é salvo no estado global e renderizado no header de Wal
   const initialEntries = ['/carteira'];
   const initialState = { user: { email: 'email@gmail.com' } };
 
-  renderWithRouterAndRedux(<Wallet />, { initialState, initialEntries });
+  renderWithRouterAndRedux(<App />, { initialState, initialEntries });
 
   const headerInfos = screen.getAllByRole('heading', { level: 3 });
   expect(headerInfos[0].innerHTML).toBe('email@gmail.com');
