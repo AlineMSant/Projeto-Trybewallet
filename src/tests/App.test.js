@@ -1,10 +1,10 @@
-import { screen } from '@testing-library/react';
+import { getAllByTestId, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
 import mockData from './helpers/mockData';
 
-describe('testes Login', () => {
+describe('Testes Login', () => {
   it('A pagina inicial na rota / deve renderizar dois inputs e um botão', () => {
     const initialEntries = ['/'];
 
@@ -24,9 +24,7 @@ describe('testes Login', () => {
   });
 
   it('Verifica se o botão só é habilitado após os campos de email e senha serem preechidos corretamente', () => {
-    const initialEntries = ['/'];
-
-    renderWithRouterAndRedux(<App />, { initialEntries });
+    const { history } = renderWithRouterAndRedux(<App />);
 
     const inputs = screen.getAllByRole('textbox');
     const button = screen.getByRole('button');
@@ -53,6 +51,11 @@ describe('testes Login', () => {
 
     userEvent.type(inputs[1], '123456');
     expect(button).not.toHaveAttribute('disabled');
+
+    userEvent.click(button);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/carteira');
   });
 });
 
@@ -147,23 +150,55 @@ describe('Testes wallet', () => {
     expect(headerTotal.innerHTML).toBe('47.53');
   });
 
-  it('Verifica se ao deletar a soma total retorna 0', () => {
+  it('Verifica se ao deletar a soma total retorna 0', async () => {
     const initialEntries = ['/carteira'];
 
+    const arrayCurWithTwoObj = [{
+      id: 0,
+      value: '10',
+      description: 'descrição',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Lazer',
+      exchangeRates: mockData,
+    }, {
+      id: 1,
+      value: '10',
+      description: 'descrição',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Lazer',
+      exchangeRates: mockData,
+    }, {
+      id: 2,
+      value: '10',
+      description: 'descrição',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Lazer',
+      exchangeRates: mockData,
+    }];
+
     const initialState = { wallet: {
-      expenses: arrayCurrencies,
+      expenses: arrayCurWithTwoObj,
       currencies: [Object.keys(mockData)] } };
 
     renderWithRouterAndRedux(<App />, { initialState, initialEntries });
 
-    const deleteButton = screen.getByTestId('delete-btn');
-    expect(deleteButton).toBeVisible();
-
-    userEvent.click(deleteButton);
-    expect(deleteButton).not.toBeVisible();
-
     const headerTotal = screen.getByTestId('total-field');
-    expect(headerTotal.innerHTML).toBe('0.00');
+    expect(headerTotal.innerHTML).toBe('142.59');
+
+    const deleteButtons = screen.getAllByTestId('delete-btn');
+    expect(deleteButtons).toHaveLength(3);
+    expect(deleteButtons[0]).toBeVisible();
+
+    userEvent.click(deleteButtons[0]);
+
+    const deleteButtonsAfter = screen.getAllByTestId('delete-btn');
+    expect(deleteButtonsAfter).toHaveLength(2);
+
+    const headerTotalAfter = screen.getByTestId('total-field');
+    expect(headerTotalAfter.innerHTML).toBe('95.06');
   });
 
   it('Verifica se ao clicar em editar o botão Editar despesa é renderizado e após clicar no botão Editar despesa a tabela é atualizada', () => {
