@@ -1,6 +1,8 @@
 import { screen } from '@testing-library/react';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
+import userEvent from '@testing-library/user-event';
+import mockData from './helpers/mockData';
 
 it('A pagina inicial na rota / deve renderizar dois inputs e um botão', () => {
   const initialEntries = ['/'];
@@ -62,4 +64,46 @@ it('Verifica se o email é salvo no estado global e renderizado no header de Wal
 
   const headerInfos = screen.getAllByRole('heading', { level: 3 });
   expect(headerInfos[0].innerHTML).toBe('email@gmail.com');
+});
+
+it('Verifica se renderiza os valores corretamente na tabela após clicar em Adicionar despesa', async () => {
+  const initialEntries = ['/carteira'];
+
+  renderWithRouterAndRedux(<App />, { initialEntries });
+
+  const valueInput = screen.getByTestId('value-input');
+  const descriptionInput = screen.getByTestId('description-input');
+  const buttonAdd = screen.getByText('Adicionar despesa');
+
+  userEvent.type(valueInput, '10');
+  userEvent.type(descriptionInput, 'dez dólares');
+  userEvent.click(buttonAdd);
+
+  const insideTableDescription = await screen.findByText('dez dólares');
+  expect(insideTableDescription).toBeVisible();
+
+  const insideTableValue = await screen.findByText('10.00');
+  expect(insideTableValue).toBeVisible();
+});
+
+it('Verifica se a soma total no header corresponde ao valor correto', () => {
+  const initialEntries = ['/carteira'];
+  const arrayCurrencies = [{
+    id: 0,
+    value: '10',
+    description: 'oi',
+    currency: 'USD',
+    method: 'Dinheiro',
+    tag: 'Alimentação',
+    exchangeRates: mockData,
+  }];
+
+  const initialState = { wallet: {
+    expenses: arrayCurrencies,
+    currencies: [Object.keys(mockData)] } };
+
+  renderWithRouterAndRedux(<App />, { initialState, initialEntries });
+
+  const headerTotal = screen.getByTestId('total-field');
+  expect(headerTotal.innerHTML).toBe('47.53');
 });
