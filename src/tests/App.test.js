@@ -13,10 +13,10 @@ describe('Testes Login', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/');
 
-    const inputs = screen.getAllByRole('textbox');
-    expect(inputs).toHaveLength(2);
-    expect(inputs[0]).toBeVisible();
-    expect(inputs[1]).toBeVisible();
+    const inputEmail = screen.getByTestId('email-input');
+    const inputPassword = screen.getByTestId('password-input');
+    expect(inputEmail).toBeVisible();
+    expect(inputPassword).toBeVisible();
 
     const button = screen.getByRole('button');
     expect(button).toBeVisible();
@@ -26,30 +26,31 @@ describe('Testes Login', () => {
   it('Verifica se o botão só é habilitado após os campos de email e senha serem preechidos corretamente', () => {
     const { history } = renderWithRouterAndRedux(<App />);
 
-    const inputs = screen.getAllByRole('textbox');
+    const inputEmail = screen.getByTestId('email-input');
+    const inputPassword = screen.getByTestId('password-input');
     const button = screen.getByRole('button');
 
     expect(button).toHaveAttribute('disabled');
 
-    userEvent.type(inputs[0], 'aline@gmail');
+    userEvent.type(inputEmail, 'aline@gmail');
     expect(button).toHaveAttribute('disabled');
 
-    userEvent.clear(inputs[0]);
+    userEvent.clear(inputEmail);
 
-    userEvent.type(inputs[0], 'alinegmail.com');
+    userEvent.type(inputEmail, 'alinegmail.com');
     expect(button).toHaveAttribute('disabled');
 
-    userEvent.clear(inputs[0]);
+    userEvent.clear(inputEmail);
 
-    userEvent.type(inputs[0], 'aline@gmail.com');
+    userEvent.type(inputEmail, 'aline@gmail.com');
     expect(button).toHaveAttribute('disabled');
 
-    userEvent.type(inputs[1], '12345');
+    userEvent.type(inputPassword, '12345');
     expect(button).toHaveAttribute('disabled');
 
-    userEvent.clear(inputs[1]);
+    userEvent.clear(inputPassword);
 
-    userEvent.type(inputs[1], '123456');
+    userEvent.type(inputPassword, '123456');
     expect(button).not.toHaveAttribute('disabled');
 
     userEvent.click(button);

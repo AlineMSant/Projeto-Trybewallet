@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import WalletForm from '../components/WalletForm';
 import { generateCurrency } from '../redux/actions';
+import '../style/Wallet.css';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class Wallet extends React.Component {
     const { currencies } = this.props;
 
     return (
-      <div>
+      <div className="container-wallet">
         <Header />
         <WalletForm currencies={ currencies } />
       </div>
