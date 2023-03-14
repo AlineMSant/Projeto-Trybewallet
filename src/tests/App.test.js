@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
 import mockData from './helpers/mockData';
-import user from '../redux/reducers/user';
 
 describe('Testes Login', () => {
   it('A pagina inicial na rota / deve renderizar dois inputs e um botão', () => {
@@ -74,6 +73,8 @@ describe('Testes wallet', () => {
   const valueInputTestId = 'value-input';
   const descriptionInputTestId = 'description-input';
   const totalHeaderTestId = 'total-field';
+  const buttonAddText = 'Adicionar despesa';
+  const deleteBtnTestId = 'delete-btn';
 
   it('Verifica se a rota /carteira renderiza o header, formulario e tabela', () => {
     const initialEntries = ['/carteira'];
@@ -93,7 +94,7 @@ describe('Testes wallet', () => {
     const methodInput = screen.getByTestId('method-input');
     const tagInput = screen.getByTestId('tag-input');
     const descriptionInput = screen.getByTestId(descriptionInputTestId);
-    const buttonAdd = screen.getByText('Adicionar despesa');
+    const buttonAdd = screen.getByText(buttonAddText);
 
     expect(valueInput).toBeVisible();
     expect(currencyInput).toBeVisible();
@@ -126,7 +127,7 @@ describe('Testes wallet', () => {
 
     const valueInput = screen.getByTestId(valueInputTestId);
     const descriptionInput = screen.getByTestId(descriptionInputTestId);
-    const buttonAdd = screen.getByText('Adicionar despesa');
+    const buttonAdd = screen.getByText(buttonAddText);
 
     userEvent.type(valueInput, '10');
     userEvent.type(descriptionInput, 'dez dólares');
@@ -190,13 +191,13 @@ describe('Testes wallet', () => {
     const headerTotal = screen.getByTestId(totalHeaderTestId);
     expect(headerTotal.innerHTML).toBe('142.59');
 
-    const deleteButtons = screen.getAllByTestId('delete-btn');
+    const deleteButtons = screen.getAllByTestId(deleteBtnTestId);
     expect(deleteButtons).toHaveLength(3);
     expect(deleteButtons[0]).toBeVisible();
 
     userEvent.click(deleteButtons[0]);
 
-    const deleteButtonsAfter = screen.getAllByTestId('delete-btn');
+    const deleteButtonsAfter = screen.getAllByTestId(deleteBtnTestId);
     expect(deleteButtonsAfter).toHaveLength(2);
 
     const headerTotalAfter = screen.getByTestId(totalHeaderTestId);
@@ -243,6 +244,8 @@ describe('Testes wallet para cobertura de reducers', () => {
   const descriptionInputTestId = 'description-input';
   const valueInputTestId = 'value-input';
   const totalHeaderTestId = 'total-field';
+  const buttonAddText = 'Adicionar despesa';
+  const deleteBtnTestId = 'delete-btn';
 
   it('Testes gerais de outra forma mockando o fetch', async () => {
     const initialEntries = ['/carteira'];
@@ -257,7 +260,7 @@ describe('Testes wallet para cobertura de reducers', () => {
 
     const valueInput = screen.getByTestId(valueInputTestId);
     const descriptionInput = screen.getByTestId(descriptionInputTestId);
-    const buttonAdd = screen.getByText('Adicionar despesa');
+    const buttonAdd = screen.getByText(buttonAddText);
 
     expect(valueInput).toBeVisible();
     expect(descriptionInput).toBeVisible();
@@ -306,7 +309,7 @@ describe('Testes wallet para cobertura de reducers', () => {
     expect(insideTableDescAfterEditV).toBeVisible();
     expect(insideTableDescAfterEditT).toBeVisible();
 
-    const deleteButton = screen.getAllByTestId('delete-btn');
+    const deleteButton = screen.getAllByTestId(deleteBtnTestId);
     expect(deleteButton).toHaveLength(3);
     expect(deleteButton[0]).toBeVisible();
     expect(deleteButton[1]).toBeVisible();
