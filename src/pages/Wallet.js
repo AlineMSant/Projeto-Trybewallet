@@ -17,8 +17,10 @@ class Wallet extends React.Component {
 
     return (
       <div className="container-wallet">
-        <Header />
-        <WalletForm currencies={ currencies } />
+        <div className="container-header-walletform">
+          <Header />
+          <WalletForm currencies={ currencies } />
+        </div>
       </div>
     );
   }

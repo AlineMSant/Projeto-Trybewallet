@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { changeExpense, deleteExpenses } from '../redux/actions';
+import '../style/Table.css';
 
 class Table extends Component {
   constructor() {
@@ -29,7 +30,7 @@ class Table extends Component {
     const { allExpenses } = this.props;
 
     return (
-      <div>
+      <div className="table-container">
         <table>
           <thead>
             <tr>
@@ -46,7 +47,7 @@ class Table extends Component {
           </thead>
           <tbody>
             { allExpenses.map((expense) => (
-              <tr key={ expense.id }>
+              <tr className="tbody-item" key={ expense.id }>
                 <td>{ expense.description }</td>
                 <td>{ expense.tag }</td>
                 <td>{ expense.method }</td>
@@ -66,6 +67,7 @@ class Table extends Component {
                 <td>Real</td>
                 <td>
                   <button
+                    className="btn-table"
                     data-testid="edit-btn"
                     onClick={ this.handleClickEdit }
                     value={ expense.id }
@@ -74,15 +76,16 @@ class Table extends Component {
                   </button>
 
                   <button
+                    className="btn-table"
                     data-testid="delete-btn"
                     onClick={ this.handleClick }
                     value={ expense.id }
                   >
                     Excluir
                   </button>
-
                 </td>
-              </tr>)) }
+              </tr>
+            )) }
           </tbody>
         </table>
       </div>

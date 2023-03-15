@@ -3,4 +3,12 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100%;
+}
+
+.container-header-walletform {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

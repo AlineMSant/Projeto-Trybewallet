@@ -1,0 +1,49 @@
+.header-container {
+  align-items: center;
+  background-color: white;
+  color: #754a82;
+  display: flex;
+  font-family: Roboto Flex, sans-serif;
+  justify-content: space-around;
+  width: 950px;
+}
+
+.img-wallet {
+  height: 55px;
+  margin-bottom: 10px;
+}
+
+.img-user , .img-coin {
+  height: 22px;
+  margin-right: 3px;
+}
+
+.img-info-head {
+  align-items: center;
+  display: flex;
+}
+
+.total-container {
+  align-items: center;
+  display: flex;
+}
+
+p {
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+.email-header {
+  color: #8fa885;
+}
+
+.behind-header-form {
+  background-color: #92b882;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 210px;
+  position: absolute;
+  top: 105px;
+  width: 1050px;
+  z-index: -1;
+}

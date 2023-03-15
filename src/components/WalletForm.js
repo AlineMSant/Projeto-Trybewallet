@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { changeExpense, editArrayExpenses, generateExpenses } from '../redux/actions';
 import Table from './Table';
+import '../style/WalletForm.css';
 
 class WalletForm extends Component {
   constructor() {
@@ -74,12 +75,57 @@ class WalletForm extends Component {
 
     return (
 
-      <div>
+      <div className="wallet-inside-container">
 
         <form id="form">
-          <label htmlFor="value">
-            Valor:
+          <label htmlFor="description">
+            Descrição
             <input
+              className="description-input"
+              type="textbox"
+              id="description"
+              name="description"
+              data-testid="description-input"
+              onChange={ this.handleChange }
+            />
+          </label>
+
+          <label htmlFor="method">
+            Método de pagamento
+            <select
+              className="method-select"
+              id="method"
+              name="method"
+              data-testid="method-input"
+              onChange={ this.handleChange }
+            >
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Cartão de crédito">Cartão de crédito</option>
+              <option value="Cartão de débito">Cartão de débito</option>
+            </select>
+          </label>
+
+          <label htmlFor="tag">
+            Tag
+            <select
+              className="tag-select"
+              id="tag"
+              name="tag"
+              data-testid="tag-input"
+              onChange={ this.handleChange }
+            >
+              <option value="Alimentação">Alimentação</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Trabalho">Trabalho</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Saúde">Saúde</option>
+            </select>
+          </label>
+
+          <label htmlFor="value">
+            Valor
+            <input
+              className="value-input"
               type="number"
               id="value"
               name="value"
@@ -89,8 +135,9 @@ class WalletForm extends Component {
           </label>
 
           <label htmlFor="currency">
-            Moeda:
+            Moeda
             <select
+              className="currency-select"
               data-testid="currency-input"
               id="currency"
               name="currency"
@@ -108,46 +155,9 @@ class WalletForm extends Component {
             </select>
           </label>
 
-          <label htmlFor="method">
-            Método de pagamento:
-            <select
-              id="method"
-              name="method"
-              data-testid="method-input"
-              onChange={ this.handleChange }
-            >
-              <option value="Dinheiro">Dinheiro</option>
-              <option value="Cartão de crédito">Cartão de crédito</option>
-              <option value="Cartão de débito">Cartão de débito</option>
-            </select>
-          </label>
+        </form>
 
-          <label htmlFor="tag">
-            Tag:
-            <select
-              id="tag"
-              name="tag"
-              data-testid="tag-input"
-              onChange={ this.handleChange }
-            >
-              <option value="Alimentação">Alimentação</option>
-              <option value="Lazer">Lazer</option>
-              <option value="Trabalho">Trabalho</option>
-              <option value="Transporte">Transporte</option>
-              <option value="Saúde">Saúde</option>
-            </select>
-          </label>
-
-          <label htmlFor="description">
-            Descrição:
-            <input
-              type="textbox"
-              id="description"
-              name="description"
-              data-testid="description-input"
-              onChange={ this.handleChange }
-            />
-          </label>
+        <div className="buttons-form">
 
           { edit
             ? (
@@ -166,7 +176,7 @@ class WalletForm extends Component {
                 Adicionar despesa
               </button>)}
 
-        </form>
+        </div>
 
         <Table />
       </div>

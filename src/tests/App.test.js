@@ -118,7 +118,7 @@ describe('Testes wallet', () => {
     renderWithRouterAndRedux(<App />, { initialState, initialEntries });
 
     const headerInfos = screen.getAllByRole('heading', { level: 3 });
-    expect(headerInfos[0].innerHTML).toBe('email@gmail.com');
+    expect(headerInfos[1].innerHTML).toBe('email@gmail.com');
   });
 
   it('Verifica se renderiza os valores corretamente na tabela após clicar em Adicionar despesa', async () => {

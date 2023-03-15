@@ -1,0 +1,103 @@
+.wallet-inside-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  align-items: center;
+  background-color: white;
+  color: #754a82;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: Roboto Flex, sans-serif;
+  font-weight: 600;
+  justify-content: center;
+  opacity: 0.9;
+  padding: 10px;
+  width: 930px;
+}
+
+input , select {
+  color: #754a82;
+  font-size: 15px;
+}
+
+input:focus , select:focus {
+  outline: 1px solid #754a82;
+}
+
+.description-input {
+  border: 1px solid #8173a9;
+  border-radius: 5px;
+  height: 25px;
+  margin-left: 5px;
+  text-align: initial;
+  width: 290px;
+}
+
+.tag-select {
+  background-color: white;
+  border: 1px solid #754a82;
+  border-radius: 5px;
+  height: 29px;
+  margin-left: 5px;
+  width: 260px;
+}
+
+.value-input {
+  border: 1px solid #754a82;
+  border-radius: 5px;
+  height: 25px;
+  margin-left: 5px;
+  text-align: initial;
+  width: 260px;
+}
+
+.method-select {
+  background-color: white;
+  border: 1px solid #754a82;
+  border-radius: 5px;
+  height: 29px;
+  margin-left: 5px;
+  width: 230px;
+}
+
+.currency-select {
+  background-color: white;
+  border: 1px solid #754a82;
+  border-radius: 5px;
+  height: 29px;
+  margin-left: 5px;
+  width: 90px;
+}
+
+label {
+  margin: 5px;
+}
+
+.buttons-form {
+  align-items: center;
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  width: 890px;
+}
+
+button {
+  background-color: #754a82;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 15px;
+  font-weight: 900;
+  height: 40px;
+  width: 330px;
+}
+
+button:hover {
+  background-color: #8f6a9a;
+}
