@@ -3,19 +3,19 @@
 ## Qual a funcionalidade ?
 Uma carteira de controle de gastos com conversor de moedas.
 
-## Habilidades desenvolvidas:
-- Criação de store, reducers, actions e dispatchers no Redux em aplicações React;
-- Conecção Redux aos componentes React;
-- Criação de actions assíncronas em aplicação React que faz uso de Redux;
-- CSS;
-- RTL utilizando lógica de testes para Redux.
-
 ## Como rodar o projeto?
 <a href="https://aline-ms-trybewallet.surge.sh/" target="_blank">Link do Projeto</a>
 ### ou
 - git clone > acessar o repositório;
 - npm install;
 - npm start. 
+
+## Habilidades desenvolvidas:
+- Criação de store, reducers, actions e dispatchers no Redux em aplicações React;
+- Conecção Redux aos componentes React;
+- Criação de actions assíncronas em aplicação React que faz uso de Redux;
+- CSS;
+- RTL utilizando lógica de testes para Redux.
 
 ## Validações da tela de Login
 - o campo e-mail deve ser válido;
@@ -37,5 +37,5 @@ Uma carteira de controle de gastos com conversor de moedas.
 
 ## Formas de contato:
 ### alinems4120@gmail.com
-### <a href="https://www.linkedin.com/in/alinemourasantos-dev/" target="_blank">Meu Linkedin</a>
+### <a href="https://www.linkedin.com/in/alinemourasantos-dev/" target="_blank">Linkedin</a>
 
