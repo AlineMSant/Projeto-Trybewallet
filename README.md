@@ -36,6 +36,6 @@ Uma carteira de controle de gastos com conversor de moedas.
 - src/tests/helpers
 
 ## Formas de contato:
-### alinems4120@gmail.com
-### <a href="https://www.linkedin.com/in/alinemourasantos-dev/" target="_blank">Linkedin</a>
+Email: alinems4120@gmail.com <br>
+Linkedin: <a href="https://www.linkedin.com/in/alinemourasantos-dev/" target="_blank">Clique aqui</a>
 
