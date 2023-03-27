@@ -1,15 +1,41 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- o que a aplicação faz?
-- link do projeto // https://aline-ms-trybewallet.surge.sh/
-- prints do projeto;
-- como rodar o projeto;
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
-- formas de contato
--->
+# TrybeWallet
+
+## Qual a funcionalidade ?
+Uma carteira de controle de gastos com conversor de moedas.
+
+## Habilidades desenvolvidas:
+- Criação de store, reducers, actions e dispatchers no Redux em aplicações React;
+- Conecção Redux aos componentes React;
+- Criação de actions assíncronas em aplicação React que faz uso de Redux;
+- CSS;
+- RTL utilizando lógica de testes para Redux.
+
+## Como rodar o projeto?
+<a href="https://aline-ms-trybewallet.surge.sh/" target="_blank">Link do Projeto</a>
+### ou
+- git clone > acessar o repositório;
+- npm install;
+- npm start. 
+
+## Validações da tela de Login
+- o campo e-mail deve ser válido;
+- a senha deve conter 6 ou mais caracteres;
+
+## Arquivos/pastas desenvolvidos
+- components;
+- images;
+- pages;
+- redux;
+- style;
+- tests/App.test.js
+- App.js
+- index.css
+- index.js
+
+## Arquivos/pastas desenvolvidos pela Trybe
+- src/tests/helpers
+
+## Formas de contato:
+### alinems4120@gmail.com
+### <a href="https://www.linkedin.com/in/alinemourasantos-dev/" target="_blank">Meu Linkedin</a>
+
