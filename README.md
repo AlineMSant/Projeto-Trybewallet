@@ -6,9 +6,10 @@ Uma carteira de controle de gastos com conversor de moedas.
 ## Como rodar o projeto?
 <a href="https://aline-ms-trybewallet.surge.sh/" target="_blank">Link do Projeto</a>
 ### ou
-- git clone > acessar o repositório;
-- npm install;
-- npm start. 
+```bash
+npm install
+npm start
+```
 
 ## Habilidades desenvolvidas:
 - Criação de store, reducers, actions e dispatchers no Redux em aplicações React;
